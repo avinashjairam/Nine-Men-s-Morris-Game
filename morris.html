@@ -23,7 +23,7 @@
 </div> -->
 
 
-<canvas id="gameArea" width="1000" height="1000">
+<canvas id="gameArea" width="1000" height="1500">
 Your browser does not support the HTML5 canvas tag.</canvas>
 
 <script>
@@ -31,44 +31,70 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 var c = document.getElementById("gameArea");
 var ctx = c.getContext("2d");
 
-var xSquare1 = 100;
-var ySquare1 = 100;
+var xSquare1 = 110;
+var ySquare1 = 110;
 
-var xSquare2 = 50;
-var ySquare2 = 50;
+var xSquare2 = 60;
+var ySquare2 = 60;
 
-var xSquare3 = 0;
-var ySquare3 = 0;
+var xSquare3 = 10;
+var ySquare3 = 10;
 
 var sizeSquare1 = 200;
 var sizeSquare2 = 300;
 var sizeSquare3 = 400; 
 
+var topLineY    = [];
+var topLineX;
+
+var leftLineX   = [];
+var leftLineY;
+
+var bottomLineY = [];
+var bottomLineX;
+
+var RightLineX  = [];
+var RightLineY;
+
 drawSquares();
+
+
 drawCirclesOnSquares(xSquare1,sizeSquare1);
+topLineY.push(xSquare1);
+
 drawCirclesOnSquares(xSquare2,sizeSquare2);
+topLineY.push(xSquare2);
 drawCirclesOnSquares(xSquare3,sizeSquare3);
+topLineY.push(xSquare3);
+
+ctx.beginPath();
+ctx.moveTo(xSquare1+sizeSquare1/2,topLineY[0]);
+ctx.lineTo(xSquare1+sizeSquare1/2,topLineY[2]);
+ctx.stroke();
+
+alert(topLineY);
 
 function drawSquares(){
 	ctx.beginPath();
 	ctx.lineWidth=0.5;
 	ctx.strokeStyle="#000000";
 
-	ctx.rect(100, 100, 200, 200);
+	ctx.rect(xSquare1, ySquare1, sizeSquare1, sizeSquare1);
 
 
 
 	ctx.stroke();
 
-	ctx.rect(50, 50, 300, 300);
+	ctx.rect(xSquare2, xSquare2, sizeSquare2, sizeSquare2);
 	ctx.stroke();
 
-	ctx.rect(0, 0, 400, 400);
+	ctx.rect(xSquare3, xSquare3, sizeSquare3, sizeSquare3);
 	ctx.stroke();
 
 }
 
 function drawCirclesOnSquares(coordinate, size){
+	var topMiddle=false;
 	ctx.beginPath();
 
 	//Top Left Circle
@@ -77,7 +103,7 @@ function drawCirclesOnSquares(coordinate, size){
 	ctx.fill();
 
 	//Left Middle Circle
-	ctx.arc(coordinate,size,10,0,2 * Math.PI);
+	ctx.arc(coordinate, coordinate + size/2,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
 
@@ -87,9 +113,17 @@ function drawCirclesOnSquares(coordinate, size){
 	ctx.fill();
 
 	//Top Middle Circle
+	topMiddle=true;
 	ctx.arc(coordinate + size/2,coordinate,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
+    
+ //    if(topMiddle){
+ //    	//alert("hi");
+	// 	topLineY.push(coordinate);
+	// 	topLineX = coordinate + size /2;
+	// }
+	// topMiddle=false;
 
 	//Top Right Circle
 	ctx.arc(coordinate + size,coordinate,10,0,2 * Math.PI);
@@ -97,7 +131,7 @@ function drawCirclesOnSquares(coordinate, size){
 	ctx.fill();
 
 	//Right Middle Circle
-	ctx.arc(coordinate + size,size,10,0,2 * Math.PI);
+	ctx.arc(coordinate + size, coordinate + size/2,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
 
@@ -112,9 +146,18 @@ function drawCirclesOnSquares(coordinate, size){
 	ctx.fill();
 
 
+
 }
+//ctx.endPath();
+//alert(JSON.stringify(topLineY));
+// alert(topLineX + " " + topLineY[2]);
+// alert(topLineX + " " + topLineY[0]);
+// ctx.beginPath();
 
+//alert(topLineX);
+function setLineCoordinates(x,y,size){
 
+}
 
 
 </script> 
