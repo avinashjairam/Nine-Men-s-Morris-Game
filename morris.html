@@ -53,26 +53,48 @@ var leftLineY;
 var bottomLineY = [];
 var bottomLineX;
 
-var RightLineX  = [];
-var RightLineY;
+var rightLineX  = [];
+var rightLineY;
 
 drawSquares();
 
 
 drawCirclesOnSquares(xSquare1,sizeSquare1);
 topLineY.push(xSquare1);
+bottomLineY.push(xSquare1+sizeSquare1)
+leftLineX.push(xSquare1);
+rightLineX.push(xSquare1+sizeSquare1);
 
 drawCirclesOnSquares(xSquare2,sizeSquare2);
 topLineY.push(xSquare2);
+bottomLineY.push(xSquare2+sizeSquare2);
+leftLineX.push(xSquare2);
+rightLineX.push(xSquare2+sizeSquare2);
+
 drawCirclesOnSquares(xSquare3,sizeSquare3);
 topLineY.push(xSquare3);
+bottomLineY.push(xSquare1+sizeSquare2);
+leftLineX.push(xSquare3);
+rightLineX.push(xSquare3+sizeSquare3);
 
 ctx.beginPath();
 ctx.moveTo(xSquare1+sizeSquare1/2,topLineY[0]);
 ctx.lineTo(xSquare1+sizeSquare1/2,topLineY[2]);
 ctx.stroke();
 
-alert(topLineY);
+ctx.moveTo(xSquare1 +sizeSquare1/2, bottomLineY[0]);
+ctx.lineTo(xSquare1 +sizeSquare1/2, bottomLineY[2]);
+ctx.stroke();
+
+ctx.moveTo(xSquare1, xSquare1+sizeSquare1/2);
+ctx.lineTo(leftLineX[2],xSquare3 + sizeSquare3/2 );
+ctx.stroke();
+
+ctx.moveTo(xSquare1+sizeSquare1, xSquare1 + sizeSquare1/2);
+ctx.lineTo(rightLineX[2],xSquare3 + sizeSquare3/2);
+ctx.stroke();
+
+alert(leftLineX);
 
 function drawSquares(){
 	ctx.beginPath();
