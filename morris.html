@@ -31,7 +31,23 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 var c = document.getElementById("gameArea");
 var ctx = c.getContext("2d");
 
+var xSquare1 = 100;
+var ySquare1 = 100;
+
+var xSquare2 = 50;
+var ySquare2 = 50;
+
+var xSquare3 = 0;
+var ySquare3 = 0;
+
+var sizeSquare1 = 200;
+var sizeSquare2 = 300;
+var sizeSquare3 = 400; 
+
 drawSquares();
+drawCirclesOnSquares(xSquare1,sizeSquare1);
+drawCirclesOnSquares(xSquare2,sizeSquare2);
+drawCirclesOnSquares(xSquare3,sizeSquare3);
 
 function drawSquares(){
 	ctx.beginPath();
@@ -39,6 +55,9 @@ function drawSquares(){
 	ctx.strokeStyle="#000000";
 
 	ctx.rect(100, 100, 200, 200);
+
+
+
 	ctx.stroke();
 
 	ctx.rect(50, 50, 300, 300);
@@ -50,7 +69,49 @@ function drawSquares(){
 }
 
 function drawCirclesOnSquares(coordinate, size){
-	
+	ctx.beginPath();
+
+	//Top Left Circle
+	ctx.arc(coordinate,coordinate,10,0,2 * Math.PI);
+	ctx.closePath();
+	ctx.fill();
+
+	//Left Middle Circle
+	ctx.arc(coordinate,size,10,0,2 * Math.PI);
+	ctx.closePath();
+	ctx.fill();
+
+	//Bottom Left Circle
+	ctx.arc(coordinate,coordinate + size,10,0,2 * Math.PI);
+	ctx.closePath();
+	ctx.fill();
+
+	//Top Middle Circle
+	ctx.arc(coordinate + size/2,coordinate,10,0,2 * Math.PI);
+	ctx.closePath();
+	ctx.fill();
+
+	//Top Right Circle
+	ctx.arc(coordinate + size,coordinate,10,0,2 * Math.PI);
+	ctx.closePath();
+	ctx.fill();
+
+	//Right Middle Circle
+	ctx.arc(coordinate + size,size,10,0,2 * Math.PI);
+	ctx.closePath();
+	ctx.fill();
+
+	//Bottom Right Circle
+	ctx.arc(coordinate + size,coordinate + size,10,0,2 * Math.PI);
+	ctx.closePath();
+	ctx.fill();
+
+	//Bottom Middle Circle
+	ctx.arc(coordinate + size/2 ,coordinate + size,10,0,2 * Math.PI);
+	ctx.closePath();
+	ctx.fill();
+
+
 }
 
 
