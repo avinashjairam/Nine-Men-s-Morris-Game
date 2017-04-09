@@ -1,8 +1,10 @@
 #gameArea{
-	width:500px;
-	height:300px;
+	/*width:800px;
+	height:600px;
+	
+	border: 1px solid #aaaaaa;*/
 	margin: 0 auto;
-	border: 1px solid #aaaaaa;
+	display: block;
 }
 
 #coinToss{
