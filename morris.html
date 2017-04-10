@@ -114,7 +114,19 @@ ctx.stroke();
 //alert(leftLineX);
 drawPieces();
 
-alert(JSON.stringify(circles));
+var json = JSON.stringify(circles);
+
+// var parsed = JSON.parse(json);
+// var arr =[];
+// arr= JSON.parse(json);
+// for(var x in parsed){
+//   arr.push(parsed[x]);
+// }
+
+for(var i =0; i<circles.length; i++){
+	alert(circles[i].id + " " + circles[i].x + " " + circles[i].y);
+}
+//alert(circles);
 
 var circle = function(key,x,y){
 	this.key = key;
