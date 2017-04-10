@@ -29,6 +29,14 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 <script>
 
 var c = document.getElementById("gameArea");
+c.addEventListener("mousedown", doMouseDown,false);
+
+function doMouseDown(event){
+	mouseX = event.pageX - c.offsetLeft;
+	mouseY = event.pageY - c.offsetTop;
+
+	alert(mouseX + " " + mouseY);
+}
 var ctx = c.getContext("2d");
 
 var xSquare1 = 110;
@@ -56,12 +64,15 @@ var bottomLineX;
 var rightLineX  = [];
 var rightLineY;
 
+var key = 0;
+var circles = [];
+
 drawSquares();
 
 
 drawCirclesOnSquares(xSquare1,sizeSquare1);
 topLineY.push(xSquare1);
-bottomLineY.push(xSquare1+sizeSquare1)
+bottomLineY.push(xSquare1+sizeSquare1);
 leftLineX.push(xSquare1);
 rightLineX.push(xSquare1+sizeSquare1);
 
@@ -78,23 +89,39 @@ leftLineX.push(xSquare3);
 rightLineX.push(xSquare3+sizeSquare3);
 
 ctx.beginPath();
+
+//Top Middle Line
 ctx.moveTo(xSquare1+sizeSquare1/2,topLineY[0]);
 ctx.lineTo(xSquare1+sizeSquare1/2,topLineY[2]);
 ctx.stroke();
 
+//Bottom Middle Line
 ctx.moveTo(xSquare1 +sizeSquare1/2, bottomLineY[0]);
 ctx.lineTo(xSquare1 +sizeSquare1/2, bottomLineY[2]);
 ctx.stroke();
 
+//Left Horizontal Line
 ctx.moveTo(xSquare1, xSquare1+sizeSquare1/2);
 ctx.lineTo(leftLineX[2],xSquare3 + sizeSquare3/2 );
 ctx.stroke();
 
+
+//Right Horizontal Line
 ctx.moveTo(xSquare1+sizeSquare1, xSquare1 + sizeSquare1/2);
 ctx.lineTo(rightLineX[2],xSquare3 + sizeSquare3/2);
 ctx.stroke();
 
-alert(leftLineX);
+//alert(leftLineX);
+drawPieces();
+
+alert(JSON.stringify(circles));
+
+var circle = function(key,x,y){
+	this.key = key;
+	this.x = x;
+	this.y = y;
+};
+
 
 function drawSquares(){
 	ctx.beginPath();
@@ -102,8 +129,6 @@ function drawSquares(){
 	ctx.strokeStyle="#000000";
 
 	ctx.rect(xSquare1, ySquare1, sizeSquare1, sizeSquare1);
-
-
 
 	ctx.stroke();
 
@@ -123,63 +148,98 @@ function drawCirclesOnSquares(coordinate, size){
 	ctx.arc(coordinate,coordinate,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
+	circles.push({id:key,x:coordinate,y:coordinate});
+	key++;
 
 	//Left Middle Circle
 	ctx.arc(coordinate, coordinate + size/2,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
+	circles.push({id:key,x:coordinate,y:coordinate + size/2});
+	key++;
+
 
 	//Bottom Left Circle
 	ctx.arc(coordinate,coordinate + size,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
+	circles.push({id:key,x:coordinate,y:coordinate + size});
+	key++;
 
 	//Top Middle Circle
 	topMiddle=true;
 	ctx.arc(coordinate + size/2,coordinate,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
+	circles.push({id:key,x:coordinate + size /2,y:coordinate});
+	key++;
     
- //    if(topMiddle){
- //    	//alert("hi");
-	// 	topLineY.push(coordinate);
-	// 	topLineX = coordinate + size /2;
-	// }
-	// topMiddle=false;
-
 	//Top Right Circle
 	ctx.arc(coordinate + size,coordinate,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
+	circles.push({id:key,x:coordinate + size,y:coordinate});
+	key++;
 
 	//Right Middle Circle
 	ctx.arc(coordinate + size, coordinate + size/2,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
+	circles.push({id:key,x:coordinate + size,y:coordinate + size/2});
+	key++;
 
 	//Bottom Right Circle
 	ctx.arc(coordinate + size,coordinate + size,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
+	circles.push({id:key,x:coordinate + size,y:coordinate + size});
+	key++;
 
 	//Bottom Middle Circle
 	ctx.arc(coordinate + size/2 ,coordinate + size,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
-
-
-
-}
-//ctx.endPath();
-//alert(JSON.stringify(topLineY));
-// alert(topLineX + " " + topLineY[2]);
-// alert(topLineX + " " + topLineY[0]);
-// ctx.beginPath();
-
-//alert(topLineX);
-function setLineCoordinates(x,y,size){
+	circles.push({id:key,x:coordinate + size,y:coordinate + size});
+	key++;
+	
 
 }
+
+function drawPieces(){
+	ctx.beginPath();
+	ctx.fillStyle="#0000FF";
+
+	var blueX = 30;
+	var blueY = 470;
+
+	ctx.font="20px Georgia";
+	ctx.fillText("Player", blueX, blueY-20);
+
+	for(var i = 0; i < 9; i++){
+		ctx.arc(blueX ,blueY,10,0,2 * Math.PI);
+		blueX += 30;
+		ctx.closePath();
+		ctx.fill();
+	}
+
+	redX = 30;
+	redY = 550;
+
+	ctx.fillStyle="#FF0000";
+	ctx.fillText("Computer", redX, redY-20);
+
+	ctx.beginPath();
+
+	for(var i = 0; i < 9; i++){
+		ctx.arc(redX ,redY,10,0,2 * Math.PI);
+		redX += 30;
+		ctx.closePath();
+		ctx.fill();
+	}
+	
+}
+
+
 
 
 </script> 
