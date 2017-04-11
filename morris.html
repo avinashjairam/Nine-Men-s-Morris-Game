@@ -36,6 +36,14 @@ function doMouseDown(event){
 	mouseY = event.pageY - c.offsetTop;
 
 	alert(mouseX + " " + mouseY);
+
+
+	for(var i =0; i<circles.length; i++){
+		if(Math.abs(mouseX-xCoordinates[i]) <=10 && Math.abs(mouseY -yCoordinates[i]) <=10){
+			alert(circleID[i] + " " + mouseX + " " + mouseY);
+			changeColor(circleID[i]);
+		}
+	}
 }
 var ctx = c.getContext("2d");
 
@@ -68,9 +76,13 @@ var key = 0;
 //This array stores JSON data for each circle. Each circle has an id, x,y coordinates
 var circles = [];
 
-var circleID = [];
+
+//The following 3 arrays are parallel. 
+var circleID = []; 
 var xCoordinates = [];
 var yCoordinates = [];
+
+
 
 drawSquares();
 
@@ -98,10 +110,21 @@ for(var i =0; i<circles.length; i++){
 	xCoordinates[i] = circles[i].x;
 	yCoordinates[i] = circles[i].y;
 
+	console.log(circleID[i] + " " + xCoordinates[i] + " " + yCoordinates[i]);
+
 	//alert(circleID[i] + " " + xCoordinates[i] + " " + yCoordinates[i]);
 }
 //alert(circles);
 
+function changeColor(id){
+	ctx.beginPath();
+	ctx.fillStyle="#0000FF";
+
+	ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+	ctx.closePath();
+	ctx.fill();
+
+}
 
 
 
@@ -227,7 +250,7 @@ function drawCirclesOnSquares(coordinate, size){
 	ctx.arc(coordinate + size/2 ,coordinate + size,10,0,2 * Math.PI);
 	ctx.closePath();
 	ctx.fill();
-	circles.push({id:key,x:coordinate + size,y:coordinate + size});
+	circles.push({id:key,x:coordinate + size/2,y:coordinate + size});
 	key++;
 	
 
@@ -265,8 +288,9 @@ function drawPieces(){
 		ctx.closePath();
 		ctx.fill();
 	}
-	
 }
+
+
 
 
 
