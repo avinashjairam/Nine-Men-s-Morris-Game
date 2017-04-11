@@ -35,12 +35,12 @@ function doMouseDown(event){
 	mouseX = event.pageX - c.offsetLeft;
 	mouseY = event.pageY - c.offsetTop;
 
-	alert(mouseX + " " + mouseY);
+	//alert(mouseX + " " + mouseY);
 
 
 	for(var i =0; i<circles.length; i++){
 		if(Math.abs(mouseX-xCoordinates[i]) <=10 && Math.abs(mouseY -yCoordinates[i]) <=10){
-			alert(circleID[i] + " " + mouseX + " " + mouseY);
+		//	alert(circleID[i] + " " + mouseX + " " + mouseY);
 			changeColor(circleID[i]);
 		}
 	}
@@ -82,7 +82,12 @@ var circleID = [];
 var xCoordinates = [];
 var yCoordinates = [];
 
+//If a player's turn is even change the circle to blue, otherwise red
+var playerTurn = 0;
 
+//These two arrays have the circle ids of the pieces which belong to red and blue respectively
+var redPieces = [];
+var bluePieces = []
 
 drawSquares();
 
@@ -118,11 +123,32 @@ for(var i =0; i<circles.length; i++){
 
 function changeColor(id){
 	ctx.beginPath();
-	ctx.fillStyle="#0000FF";
 
-	ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
-	ctx.closePath();
-	ctx.fill();
+	if(bluePieces.indexOf(id) > -1 || redPieces.indexOf(id) > -1){
+			alert("invalid move!");
+	}
+	else if(playerTurn%2==0){
+		bluePieces.push(id);
+		ctx.fillStyle="#0000FF";
+		ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+		ctx.closePath();
+		ctx.fill();
+
+		playerTurn++;
+	}
+	else{
+		redPieces.push(id);
+		ctx.fillStyle="#FF0000";
+
+		ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+		ctx.closePath();
+		ctx.fill();
+
+		playerTurn++;
+	}
+	
+
+	
 
 }
 
@@ -267,7 +293,7 @@ function drawPieces(){
 	ctx.font="20px Georgia";
 	ctx.fillText("Player", blueX, blueY-20);
 
-	for(var i = 0; i < 9; i++){
+	for(var i = 0; i < 9 - bluePieces.length; i++){
 		ctx.arc(blueX ,blueY,10,0,2 * Math.PI);
 		blueX += 30;
 		ctx.closePath();
@@ -282,7 +308,7 @@ function drawPieces(){
 
 	ctx.beginPath();
 
-	for(var i = 0; i < 9; i++){
+	for(var i = 0; i < 9- redPieces.length; i++){
 		ctx.arc(redX ,redY,10,0,2 * Math.PI);
 		redX += 30;
 		ctx.closePath();
