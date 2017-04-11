@@ -65,76 +65,47 @@ var rightLineX  = [];
 var rightLineY;
 
 var key = 0;
+//This array stores JSON data for each circle. Each circle has an id, x,y coordinates
 var circles = [];
+
+var circleID = [];
+var xCoordinates = [];
+var yCoordinates = [];
 
 drawSquares();
 
 
 drawCirclesOnSquares(xSquare1,sizeSquare1);
-topLineY.push(xSquare1);
-bottomLineY.push(xSquare1+sizeSquare1);
-leftLineX.push(xSquare1);
-rightLineX.push(xSquare1+sizeSquare1);
+
 
 drawCirclesOnSquares(xSquare2,sizeSquare2);
-topLineY.push(xSquare2);
-bottomLineY.push(xSquare2+sizeSquare2);
-leftLineX.push(xSquare2);
-rightLineX.push(xSquare2+sizeSquare2);
+
 
 drawCirclesOnSquares(xSquare3,sizeSquare3);
-topLineY.push(xSquare3);
-bottomLineY.push(xSquare1+sizeSquare2);
-leftLineX.push(xSquare3);
-rightLineX.push(xSquare3+sizeSquare3);
 
-ctx.beginPath();
+drawLines();
 
-//Top Middle Line
-ctx.moveTo(xSquare1+sizeSquare1/2,topLineY[0]);
-ctx.lineTo(xSquare1+sizeSquare1/2,topLineY[2]);
-ctx.stroke();
-
-//Bottom Middle Line
-ctx.moveTo(xSquare1 +sizeSquare1/2, bottomLineY[0]);
-ctx.lineTo(xSquare1 +sizeSquare1/2, bottomLineY[2]);
-ctx.stroke();
-
-//Left Horizontal Line
-ctx.moveTo(xSquare1, xSquare1+sizeSquare1/2);
-ctx.lineTo(leftLineX[2],xSquare3 + sizeSquare3/2 );
-ctx.stroke();
-
-
-//Right Horizontal Line
-ctx.moveTo(xSquare1+sizeSquare1, xSquare1 + sizeSquare1/2);
-ctx.lineTo(rightLineX[2],xSquare3 + sizeSquare3/2);
-ctx.stroke();
 
 //alert(leftLineX);
 drawPieces();
 
 var json = JSON.stringify(circles);
 
-// var parsed = JSON.parse(json);
-// var arr =[];
-// arr= JSON.parse(json);
-// for(var x in parsed){
-//   arr.push(parsed[x]);
-// }
+
 
 for(var i =0; i<circles.length; i++){
-	alert(circles[i].id + " " + circles[i].x + " " + circles[i].y);
+	circleID[i] = circles[i].id;
+	xCoordinates[i] = circles[i].x;
+	yCoordinates[i] = circles[i].y;
+
+	//alert(circleID[i] + " " + xCoordinates[i] + " " + yCoordinates[i]);
 }
 //alert(circles);
 
-var circle = function(key,x,y){
-	this.key = key;
-	this.x = x;
-	this.y = y;
-};
 
 
+
+//This function draws 3 squares on the screen
 function drawSquares(){
 	ctx.beginPath();
 	ctx.lineWidth=0.5;
@@ -152,6 +123,51 @@ function drawSquares(){
 
 }
 
+function drawLines(){
+	topLineY.push(xSquare1);
+	bottomLineY.push(xSquare1+sizeSquare1);
+	leftLineX.push(xSquare1);
+	rightLineX.push(xSquare1+sizeSquare1);
+
+	topLineY.push(xSquare2);
+	bottomLineY.push(xSquare2+sizeSquare2);
+	leftLineX.push(xSquare2);
+	rightLineX.push(xSquare2+sizeSquare2);
+
+
+	topLineY.push(xSquare3);
+	bottomLineY.push(xSquare1+sizeSquare2);
+	leftLineX.push(xSquare3);
+	rightLineX.push(xSquare3+sizeSquare3);
+
+	ctx.beginPath();
+
+	//Top Middle Line
+	ctx.moveTo(xSquare1+sizeSquare1/2,topLineY[0]);
+	ctx.lineTo(xSquare1+sizeSquare1/2,topLineY[2]);
+	ctx.stroke();
+
+	//Bottom Middle Line
+	ctx.moveTo(xSquare1 +sizeSquare1/2, bottomLineY[0]);
+	ctx.lineTo(xSquare1 +sizeSquare1/2, bottomLineY[2]);
+	ctx.stroke();
+
+	//Left Horizontal Line
+	ctx.moveTo(xSquare1, xSquare1+sizeSquare1/2);
+	ctx.lineTo(leftLineX[2],xSquare3 + sizeSquare3/2 );
+	ctx.stroke();
+
+
+	//Right Horizontal Line
+	ctx.moveTo(xSquare1+sizeSquare1, xSquare1 + sizeSquare1/2);
+	ctx.lineTo(rightLineX[2],xSquare3 + sizeSquare3/2);
+	ctx.stroke();
+
+
+}
+
+//This function is responsible for drawing the circles on the squares
+//It receives the coordinates and dimensions of the square as parameters
 function drawCirclesOnSquares(coordinate, size){
 	var topMiddle=false;
 	ctx.beginPath();
@@ -217,6 +233,7 @@ function drawCirclesOnSquares(coordinate, size){
 
 }
 
+//This function draws the blue and red pieces on the screen
 function drawPieces(){
 	ctx.beginPath();
 	ctx.fillStyle="#0000FF";
