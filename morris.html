@@ -86,9 +86,17 @@ var yCoordinates = [];
 var playerTurn = 0;
 
 //These two arrays have the circle ids of the pieces which belong to red and blue respectively
+//These are pieces which have actually been placed on the board
 var redPieces = [];
-var bluePieces = []
+var bluePieces = [];
 
+var initialRedPiecesY;
+var initialRedPieces = [];
+var initialBluePiecesY;
+var initialBluePieces = [];
+
+var blueCount = 0;
+var redCount = 0;
 drawSquares();
 
 
@@ -124,27 +132,44 @@ for(var i =0; i<circles.length; i++){
 function changeColor(id){
 	ctx.beginPath();
 
+
+
 	if(bluePieces.indexOf(id) > -1 || redPieces.indexOf(id) > -1){
 			alert("invalid move!");
 	}
 	else if(playerTurn%2==0){
-		bluePieces.push(id);
-		ctx.fillStyle="#0000FF";
-		ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
-		ctx.closePath();
-		ctx.fill();
-
-		playerTurn++;
+		if(blueCount < 9){
+			bluePieces.push(id);
+			ctx.fillStyle="#0000FF";
+			ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+			ctx.closePath();
+			ctx.fill();
+			blueCount++;
+			drawPieces();
+			playerTurn++;
+			removePieces();
+			//alert(blueCount);
+		}
+		else{
+			alert("You must move pieces now!");
+		}
 	}
 	else{
-		redPieces.push(id);
-		ctx.fillStyle="#FF0000";
-
-		ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
-		ctx.closePath();
-		ctx.fill();
-
-		playerTurn++;
+		if(redCount < 9){
+			redPieces.push(id);
+			ctx.fillStyle="#FF0000";
+			ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+			ctx.closePath();
+			ctx.fill();
+			redCount++;
+			drawPieces();
+			playerTurn++;
+			removePieces();
+			//alert(redCount);
+		}
+		else{
+			alert("You must move pieces now!");
+		}
 	}
 	
 
@@ -282,6 +307,35 @@ function drawCirclesOnSquares(coordinate, size){
 
 }
 
+function removePieces(){
+	ctx.beginPath();
+	ctx.fillStyle="#FFFFFF";
+
+	//alert(blueCount + " " + redCount);
+	
+	for(var i = 0; i < blueCount; i++){
+		//alert(initialBluePieces[i] + " " + initialBluePiecesY);
+		ctx.arc(initialBluePieces[i], initialBluePiecesY, 10,0,2 * Math.PI);
+		ctx.closePath();
+		ctx.fill();
+	}
+
+
+	ctx.beginPath();
+
+	for(var i = 0; i < redCount; i++){
+		ctx.arc(initialRedPieces[i] ,initialRedPiecesY,10,0,2 * Math.PI);
+		ctx.closePath();
+		ctx.fill();
+	}
+
+
+
+
+
+
+
+}
 //This function draws the blue and red pieces on the screen
 function drawPieces(){
 	ctx.beginPath();
@@ -290,10 +344,14 @@ function drawPieces(){
 	var blueX = 30;
 	var blueY = 470;
 
+	initialBluePiecesY = blueY;
+
+	//alert("hey");
 	ctx.font="20px Georgia";
 	ctx.fillText("Player", blueX, blueY-20);
 
 	for(var i = 0; i < 9 - bluePieces.length; i++){
+		initialBluePieces.push(blueX);
 		ctx.arc(blueX ,blueY,10,0,2 * Math.PI);
 		blueX += 30;
 		ctx.closePath();
@@ -303,17 +361,22 @@ function drawPieces(){
 	redX = 30;
 	redY = 550;
 
+	initialRedPiecesY = redY;
+
 	ctx.fillStyle="#FF0000";
 	ctx.fillText("Computer", redX, redY-20);
 
 	ctx.beginPath();
 
 	for(var i = 0; i < 9- redPieces.length; i++){
+		initialRedPieces.push(redX);
 		ctx.arc(redX ,redY,10,0,2 * Math.PI);
 		redX += 30;
 		ctx.closePath();
 		ctx.fill();
 	}
+
+
 }
 
 
