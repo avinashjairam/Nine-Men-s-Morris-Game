@@ -97,6 +97,8 @@ var initialBluePieces = [];
 
 var blueCount = 0;
 var redCount = 0;
+var blueMill = false;
+bar redMill = false;
 drawSquares();
 
 
@@ -137,8 +139,11 @@ function changeColor(id){
 	if(bluePieces.indexOf(id) > -1 || redPieces.indexOf(id) > -1){
 			alert("invalid move!");
 	}
+	else if( (blueCount >= 9 && bluePieces.indexOf(id) == -1) && (redCount >= 9 && redPieces.indexOf(id) == -1)) {
+			alert(blueCount + " " + redCount);
+	}
 	else if(playerTurn%2==0){
-		if(blueCount < 9){
+		
 			bluePieces.push(id);
 			ctx.fillStyle="#0000FF";
 			ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
@@ -149,13 +154,11 @@ function changeColor(id){
 			playerTurn++;
 			removePieces();
 			//alert(blueCount);
-		}
-		else{
-			alert("You must move pieces now!");
-		}
+		
+		
 	}
 	else{
-		if(redCount < 9){
+		
 			redPieces.push(id);
 			ctx.fillStyle="#FF0000";
 			ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
@@ -166,10 +169,8 @@ function changeColor(id){
 			playerTurn++;
 			removePieces();
 			//alert(redCount);
-		}
-		else{
-			alert("You must move pieces now!");
-		}
+	
+		
 	}
 	
 
