@@ -155,10 +155,25 @@ function changeColor(id){
 					alert("blue count  " + blueCount);
 				alert("invalid move!");
 			}
-			if(blueSelectMove){
+			else if(blueSelectMove){
+				ctx.beginPath();
+				ctx.fillStyle="#0000FF";
 				ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
-				ctx.closePath();
 				ctx.fill();
+				ctx.closePath();
+				
+
+				 ctx.beginPath();
+				 ctx.fillStyle="#000000";
+				 ctx.arc(xCoordinates[bluePiecesToMove[0]],yCoordinates[bluePiecesToMove[0]],10,0,2 * Math.PI);
+				// ctx.arc()
+				 alert(xCoordinates[bluePiecesToMove[0]] + " " + yCoordinates[bluePiecesToMove[0]]);
+				 ctx.closePath();
+				 ctx.fill();
+
+				bluePiecesToMove = [];
+				playerTurn++;
+				blueSelectMove = false;
 
 			}
 			else if(blueCount >= 9 && bluePieces.indexOf(id) > -1){
@@ -166,7 +181,7 @@ function changeColor(id){
 				blueSelectMove = true;
 				bluePiecesToMove.push(id);
 				alert(blueSelectMove);
-				
+
 			}
 
 			else if(blueCount >= 9 && bluePieces.indexOf(id) == -1 && blueSelectMove == false){
@@ -193,6 +208,34 @@ function changeColor(id){
 			if(redPieces.indexOf(id) > -1 && redCount < 9){
 					alert("red count  " + redCount);
 				alert("invalid move!");
+			}
+			else if(redSelectMove){
+				ctx.beginPath();
+				ctx.fillStyle="#FF0000";
+				ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+				ctx.fill();
+				ctx.closePath();
+				
+
+				ctx.beginPath();
+				ctx.fillStyle="#000000";
+				ctx.arc(xCoordinates[redPiecesToMove[0]],yCoordinates[redPiecesToMove[0]],10,0,2 * Math.PI);
+				// ctx.arc()
+				alert(xCoordinates[redPiecesToMove[0]] + " " + yCoordinates[redPiecesToMove[0]]);
+				ctx.closePath();
+				ctx.fill();
+
+				redPiecesToMove = [];
+				playerTurn++;
+				redSelectMove = false;
+
+			}
+			else if(redCount >= 9 && redPieces.indexOf(id) > -1){
+				playerTurn += 2;
+				redSelectMove = true;
+				redPiecesToMove.push(id);
+				alert(redSelectMove);
+
 			}
 			else if(redCount >= 9 && redPieces.indexOf(id) == -1 && redSelectMove == false){
 				alert("red count  " + redCount);
