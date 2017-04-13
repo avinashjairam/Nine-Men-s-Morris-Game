@@ -164,6 +164,7 @@ function changeColor(id){
 				ctx.fill();
 				ctx.closePath();
 				
+				bluePieces.push(id);
 
 				 ctx.beginPath();
 				 ctx.fillStyle="#000000";
@@ -194,6 +195,7 @@ function changeColor(id){
 				playerTurn += 2;
 				blueSelectMove = true;
 				bluePiecesToMove.push(id);
+				//delete bluePieces[bluePieces.indexOf(id)];
 				alert(blueSelectMove);
 
 			}
@@ -245,6 +247,7 @@ function changeColor(id){
 				ctx.fill();
 				ctx.closePath();
 				
+				redPieces.push(id);
 
 				ctx.beginPath();
 				ctx.fillStyle="#000000";
@@ -265,7 +268,7 @@ function changeColor(id){
 				ctx.fillStyle="#FFFFFF";
 				ctx.font="20px Georgia";
 				ctx.fillText("Red\'s Move", 500, 50);
-								
+
 				ctx.fillStyle="#0000FF";
 				ctx.font="20px Georgia";
 				ctx.fillText("Blue\'s Move", 500, 50);
@@ -276,6 +279,8 @@ function changeColor(id){
 				playerTurn += 2;
 				redSelectMove = true;
 				redPiecesToMove.push(id);
+
+				//delete redPieces[redPieces.indexOf(id)];
 				alert(redSelectMove);
 
 			}
