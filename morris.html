@@ -151,6 +151,19 @@ function changeColor(id){
 	// }
 	else if(playerTurn%2==0){
 
+			ctx.beginPath();
+		
+
+			// ctx.fillStyle="#FFFFFF";
+			// ctx.font="20px Georgia";
+			// ctx.fillText("Red\'s Move", 500, 50);
+
+			
+			// ctx.fillStyle="#0000FF";
+			// ctx.font="20px Georgia";
+			// ctx.fillText("Blue\'s Move", 500, 50);
+			// ctx.closePath();
+
 			if(bluePieces.indexOf(id) > -1 && blueCount < 9){
 					alert("blue count  " + blueCount);
 				alert("invalid move!");
@@ -200,11 +213,39 @@ function changeColor(id){
 				playerTurn++;
 				removePieces();
 				//alert(blueCount);
+
+				ctx.beginPath();
+				ctx.fillStyle="#FFFFFF";
+				ctx.font="20px Georgia";
+				ctx.fillText("Blue\'s Move", 500, 50);
+
+
+
+				ctx.fillStyle="#FF0000";
+			
+				//alert("hey");
+				ctx.font="20px Georgia";
+				ctx.fillText("Red\'s Move", 500, 50);
+				ctx.closePath();
 			}
 		
 		
 	}
 	else{
+			// ctx.beginPath();
+			// ctx.fillStyle="#FFFFFF";
+			// ctx.font="20px Georgia";
+			// ctx.fillText("Blue\'s Move", 500, 50);
+
+
+
+			// ctx.fillStyle="#FF0000";
+		
+			// //alert("hey");
+			// ctx.font="20px Georgia";
+			// ctx.fillText("Red\'s Move", 500, 50);
+			// ctx.closePath();
+
 			if(redPieces.indexOf(id) > -1 && redCount < 9){
 					alert("red count  " + redCount);
 				alert("invalid move!");
@@ -258,6 +299,19 @@ function changeColor(id){
 				playerTurn++;
 				removePieces();
 				//alert(redCount);
+
+				ctx.beginPath();
+		
+
+			ctx.fillStyle="#FFFFFF";
+			ctx.font="20px Georgia";
+			ctx.fillText("Red\'s Move", 500, 50);
+
+			
+			ctx.fillStyle="#0000FF";
+			ctx.font="20px Georgia";
+			ctx.fillText("Blue\'s Move", 500, 50);
+			ctx.closePath();
 			}
 		
 	}
