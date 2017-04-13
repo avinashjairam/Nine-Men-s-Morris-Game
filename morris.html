@@ -153,17 +153,6 @@ function changeColor(id){
 
 			ctx.beginPath();
 		
-
-			// ctx.fillStyle="#FFFFFF";
-			// ctx.font="20px Georgia";
-			// ctx.fillText("Red\'s Move", 500, 50);
-
-			
-			// ctx.fillStyle="#0000FF";
-			// ctx.font="20px Georgia";
-			// ctx.fillText("Blue\'s Move", 500, 50);
-			// ctx.closePath();
-
 			if(bluePieces.indexOf(id) > -1 && blueCount < 9){
 					alert("blue count  " + blueCount);
 				alert("invalid move!");
@@ -187,6 +176,18 @@ function changeColor(id){
 				bluePiecesToMove = [];
 				playerTurn++;
 				blueSelectMove = false;
+
+				ctx.beginPath();
+				ctx.fillStyle="#FFFFFF";
+				ctx.font="20px Georgia";
+				ctx.fillText("Blue\'s Move", 500, 50);
+
+				ctx.fillStyle="#FF0000";
+			
+				//alert("hey");
+				ctx.font="20px Georgia";
+				ctx.fillText("Red\'s Move", 500, 50);
+				ctx.closePath();
 
 			}
 			else if(blueCount >= 9 && bluePieces.indexOf(id) > -1){
@@ -232,20 +233,7 @@ function changeColor(id){
 		
 	}
 	else{
-			// ctx.beginPath();
-			// ctx.fillStyle="#FFFFFF";
-			// ctx.font="20px Georgia";
-			// ctx.fillText("Blue\'s Move", 500, 50);
-
-
-
-			// ctx.fillStyle="#FF0000";
-		
-			// //alert("hey");
-			// ctx.font="20px Georgia";
-			// ctx.fillText("Red\'s Move", 500, 50);
-			// ctx.closePath();
-
+	
 			if(redPieces.indexOf(id) > -1 && redCount < 9){
 					alert("red count  " + redCount);
 				alert("invalid move!");
@@ -269,6 +257,19 @@ function changeColor(id){
 				redPiecesToMove = [];
 				playerTurn++;
 				redSelectMove = false;
+
+
+				ctx.beginPath();
+		
+
+				ctx.fillStyle="#FFFFFF";
+				ctx.font="20px Georgia";
+				ctx.fillText("Red\'s Move", 500, 50);
+								
+				ctx.fillStyle="#0000FF";
+				ctx.font="20px Georgia";
+				ctx.fillText("Blue\'s Move", 500, 50);
+				ctx.closePath();
 
 			}
 			else if(redCount >= 9 && redPieces.indexOf(id) > -1){
@@ -303,15 +304,15 @@ function changeColor(id){
 				ctx.beginPath();
 		
 
-			ctx.fillStyle="#FFFFFF";
-			ctx.font="20px Georgia";
-			ctx.fillText("Red\'s Move", 500, 50);
+				ctx.fillStyle="#FFFFFF";
+				ctx.font="20px Georgia";
+				ctx.fillText("Red\'s Move", 500, 50);
 
-			
-			ctx.fillStyle="#0000FF";
-			ctx.font="20px Georgia";
-			ctx.fillText("Blue\'s Move", 500, 50);
-			ctx.closePath();
+				
+				ctx.fillStyle="#0000FF";
+				ctx.font="20px Georgia";
+				ctx.fillText("Blue\'s Move", 500, 50);
+				ctx.closePath();
 			}
 		
 	}
