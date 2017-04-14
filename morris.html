@@ -139,17 +139,12 @@ var mill10 = [0,1,2];
 var mill11 = [2,7,6];
 var mill12 = [4,5,6];
 
-
-
 //mills which cross across squares
 
 var mill13 = [19,11,3];
 var mill14 = [17,9,1];
 var mill15 = [7,15,23];
-var mill15 = [5,13,21];
-
-
-
+var mill16 = [5,13,21];
 
 var blueCount = 0;
 var redCount = 0;
@@ -382,6 +377,20 @@ function changeColor(id){
 }
 
 
+function checkMill(color){
+	var check1 = false, check2=false, check3=false;
+
+	for(var i = 0; i < 3; i++){
+		if(color == 1){
+
+		}
+	}
+
+
+
+
+}
+
 
 //This function draws 3 squares on the screen
 function drawSquares(){
@@ -532,13 +541,6 @@ function removePieces(){
 		ctx.closePath();
 		ctx.fill();
 	}
-
-
-
-
-
-
-
 }
 //This function draws the blue and red pieces on the screen
 function drawPieces(){
