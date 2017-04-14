@@ -40,8 +40,8 @@ function doMouseDown(event){
 
 	for(var i =0; i<circles.length; i++){
 		if(Math.abs(mouseX-xCoordinates[i]) <=10 && Math.abs(mouseY -yCoordinates[i]) <=10){
-		//	alert(circleID[i] + " " + mouseX + " " + mouseY);
-			changeColor(circleID[i]);
+			alert(circleID[i] + " " + mouseX + " " + mouseY);
+			// changeColor(circleID[i]);
 		}
 	}
 }
@@ -97,6 +97,36 @@ var initialRedPiecesY;
 var initialRedPieces = [];
 var initialBluePiecesY;
 var initialBluePieces = [];
+
+var circle0 = [0, 1, 3];
+var circle1 = [1,2,0,9];
+var circle2 = [2,1,7];
+var circle3 = [3,0,4,11];
+var circle4 = [4,3,5];
+var circle5 = [5,4,6,13];
+var circle6 = [6,5,7];
+var circle7 = [7,2,6,15];
+var circle8 = [8,9,11];
+var circle9 = [9,1,8,10,17];
+var circle10 = [10,9,15];
+var circle11 = [11,8,12,3,19];
+var circle12 = [12,11,13];
+var circle13 = [13,12,14,5,21];
+var circle14 = [14,13,15];
+var circle15 = [15,10,14,7,23];
+var circle16 = [16,17,19];
+var circle17 = [17,16,18,9];
+var circle18 = [18,17,23];
+var circle19 = [19,16,11,20];
+var circle20 = [20,19,21];
+var circle21 = [21,13,20,22];
+var circle22 = [22.21,23];
+var circle23 = [23,18,22,15];
+
+
+
+
+
 
 var blueCount = 0;
 var redCount = 0;
@@ -177,6 +207,7 @@ function changeColor(id){
 				bluePiecesToMove = [];
 				playerTurn++;
 				blueSelectMove = false;
+
 
 				ctx.beginPath();
 				ctx.fillStyle="#FFFFFF";
