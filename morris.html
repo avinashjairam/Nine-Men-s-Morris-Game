@@ -40,8 +40,8 @@ function doMouseDown(event){
 
 	for(var i =0; i<circles.length; i++){
 		if(Math.abs(mouseX-xCoordinates[i]) <=10 && Math.abs(mouseY -yCoordinates[i]) <=10){
-			alert(circleID[i] + " " + mouseX + " " + mouseY);
-			// changeColor(circleID[i]);
+			//alert(circleID[i] + " " + mouseX + " " + mouseY);
+			 changeColor(circleID[i]);
 		}
 	}
 }
@@ -191,9 +191,6 @@ function changeColor(id){
 
 			alert("invalid move!" + blueCount + " " + redCount);
 	}
-	// else if( (blueCount >= 9 && bluePieces.indexOf(id) == -1) && (redCount >= 9 && redPieces.indexOf(id) == -1)) {
-	// 		alert("You must move a piece on the board now");
-	// }
 	else if(playerTurn%2==0){
 
 			ctx.beginPath();
@@ -261,8 +258,7 @@ function changeColor(id){
 				drawPieces();
 				playerTurn++;
 				removePieces();
-				//alert(blueCount);
-
+				
 				ctx.beginPath();
 				ctx.fillStyle="#FFFFFF";
 				ctx.font="20px Georgia";
@@ -272,10 +268,12 @@ function changeColor(id){
 
 				ctx.fillStyle="#FF0000";
 			
-				//alert("hey");
+			
 				ctx.font="20px Georgia";
 				ctx.fillText("Red\'s Move", 500, 50);
 				ctx.closePath();
+
+				checkMill("blue");
 			}
 		
 		
@@ -364,6 +362,8 @@ function changeColor(id){
 				ctx.font="20px Georgia";
 				ctx.fillText("Blue\'s Move", 500, 50);
 				ctx.closePath();
+
+				checkMill("red");
 			}
 		
 	}
@@ -382,14 +382,18 @@ function checkMill(color){
 	var currentMill = [];
 
 	for(var i = 0; i < mills.length; i++){
-		if(pieces.indexOf(mills[i][0]) == -1 || pieces.indexOf(mills[i][1]) == -1 || pieces.indexOf(mills[i][1 == -1])){
+		if(pieces.indexOf(mills[i][0]) == -1 || pieces.indexOf(mills[i][1]) == -1 || pieces.indexOf(mills[i][2]) == -1 ){
+		//	alert(pieces.indexOf(mills[i][0]) + " " + pieces.indexOf(mills[i][1]) + " " + pieces.indexOf(mills[i][0]));
 			continue;
 		}
-		currentMill = mills[i]
-		break;
+		else{
+			alert("mill");
+			currentMill = mills[i]
+			break;
+		}
 	}
 
-	alert(currentMill);
+	//alert("pieces");
 
 
 
