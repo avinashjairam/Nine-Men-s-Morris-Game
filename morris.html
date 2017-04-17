@@ -188,7 +188,7 @@ function changeColor(id){
 
 
 
-	if( (bluePieces.indexOf(id) > -1 || redPieces.indexOf(id) > -1) && (blueCount < 9 || redCount < 9) && (blueMill == false && redMill ==false) ){
+	if( (bluePieces.indexOf(id) > -1 || redPieces.indexOf(id) > -1) && (blueCount < 9 || redCount < 9)  && (blueMill == false && redMill ==false) ){
 
 			alert("invalid move!" + blueCount + " " + redCount);
 	}
@@ -295,11 +295,18 @@ function changeColor(id){
 		
 	}
 	else{
+			// if(redMill){
+			// 	alert("redMilladsfasdfasdf");
+			// }
 	
-			if(redPieces.indexOf(id) > -1 && redCount < 9 && !redMill){
+			// else
+			 if(redPieces.indexOf(id) > -1 && redCount < 9 && redMill == false){
 					alert("red count  " + redCount);
 				alert("invalid move!");
 			}
+			// else if(redMill){
+			// 	alert("mill");
+			// }
 			else if(redSelectMove){
 				ctx.beginPath();
 				ctx.fillStyle="#FF0000";
@@ -342,15 +349,24 @@ function changeColor(id){
 				alert(redSelectMove);
 
 			}
-			else if(redMill && bluePieces.indexOf(id) >= -1){
-				alert("good pick" + redMill);
+			else if(redMill){
+				//alert("good pick" + redMill);
+				alert(redPieces.indexOf(id) + " " + bluePieces.indexOf(id));
 				
+				if(redPieces.indexOf(id) == -1 && bluePieces.indexOf(id) == -1){
+					alert("invalid move");
+				}
+				else if(redPieces.indexOf(id) > -1){
+					alert("invalid move");
+				}
+
+
 			}
 			else if(redCount >= 9 && redPieces.indexOf(id) == -1 && redSelectMove == false){
 				alert("red count  " + redCount);
 				alert("You must move a piece on the board now! Click on one of your pieces and then click on an empty node to move it");
 			}
-			else if(redCount >= 9 && redPieces.indexOf(id) >= -1){
+			else if(redCount >= 9 && redPieces.indexOf(id) > -1){
 				playerTurn += 2;
 				redSelectMove = true;
 				redPiecesToMove.push(id);
@@ -395,6 +411,7 @@ function changeColor(id){
 					ctx.closePath();
 
 
+
 					playerTurn += 2;
 				}
 				else{
@@ -411,7 +428,7 @@ function changeColor(id){
 
 function clearMessageBoard(){
 	//ctx.beginPath();
-	alert("hey");
+	//alert("hey");
 	ctx.fillStyle = "#FFFFFF";
 	ctx.fillRect(500,30,200,150);
 	//ctx.closePath();
