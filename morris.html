@@ -188,7 +188,7 @@ function changeColor(id){
 
 
 
-	if( (bluePieces.indexOf(id) > -1 || redPieces.indexOf(id) > -1) && (blueCount < 9 || redCount < 9) ){
+	if( (bluePieces.indexOf(id) > -1 || redPieces.indexOf(id) > -1) && (blueCount < 9 || redCount < 9) && (blueMill == false && redMill ==false) ){
 
 			alert("invalid move!" + blueCount + " " + redCount);
 	}
@@ -277,7 +277,14 @@ function changeColor(id){
 				checkMill("blue");
 
 				if(blueMill){
-					alert("blueMill");
+					alert("Blue Mill");
+				 	clearMessageBoard();
+				 	ctx.fillStyle="#0000FF";
+					ctx.font="20px Georgia";
+					ctx.fillText("Blue Mill! You must capture a Red Piece!", 500, 50);
+					ctx.closePath();
+
+
 					playerTurn += 2;
 				}
 				else{
@@ -289,7 +296,7 @@ function changeColor(id){
 	}
 	else{
 	
-			if(redPieces.indexOf(id) > -1 && redCount < 9){
+			if(redPieces.indexOf(id) > -1 && redCount < 9 && !redMill){
 					alert("red count  " + redCount);
 				alert("invalid move!");
 			}
@@ -335,6 +342,10 @@ function changeColor(id){
 				alert(redSelectMove);
 
 			}
+			else if(redMill && bluePieces.indexOf(id) >= -1){
+				alert("good pick" + redMill);
+				
+			}
 			else if(redCount >= 9 && redPieces.indexOf(id) == -1 && redSelectMove == false){
 				alert("red count  " + redCount);
 				alert("You must move a piece on the board now! Click on one of your pieces and then click on an empty node to move it");
@@ -353,7 +364,7 @@ function changeColor(id){
 				ctx.fill();
 				redCount++;
 				drawPieces();
-				playerTurn++;
+				//playerTurn++;
 				removePieces();
 				//alert(redCount);
 
@@ -371,6 +382,24 @@ function changeColor(id){
 				ctx.closePath();
 
 				checkMill("red");
+
+				if(redMill){
+					//alert("red Mill");
+
+					
+					alert("redMill");
+				 	clearMessageBoard();
+				 	ctx.fillStyle="#FF0000";
+					ctx.font="20px Georgia";
+					ctx.fillText("Red Mill! You must capture a Blue Piece!", 500, 50);
+					ctx.closePath();
+
+
+					playerTurn += 2;
+				}
+				else{
+					playerTurn++;
+				}
 			}
 		
 	}
@@ -380,6 +409,13 @@ function changeColor(id){
 
 }
 
+function clearMessageBoard(){
+	//ctx.beginPath();
+	alert("hey");
+	ctx.fillStyle = "#FFFFFF";
+	ctx.fillRect(500,30,200,150);
+	//ctx.closePath();
+}
 
 function checkMill(color){
 	var matchCount = 0;
@@ -398,11 +434,11 @@ function checkMill(color){
 			if(color === "blue"){
 				blueMill = true;
 				//playerTurn += 2;
-				alert("blue mill");
+				//alert("blue mill");
 			}
 			else{
 				redMill = true;
-				playerTurn += 2;
+				//playerTurn += 2;
 				//alert("red mill");
 			}
 			//alert("mill");
