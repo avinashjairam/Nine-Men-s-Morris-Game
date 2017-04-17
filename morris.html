@@ -150,6 +150,7 @@ var redMill = false;
 
 var blueSelectMove = false;
 var redSelectMove = false;
+
 drawSquares();
 
 
@@ -256,7 +257,7 @@ function changeColor(id){
 				ctx.fill();
 				blueCount++;
 				drawPieces();
-				playerTurn++;
+				//playerTurn++;
 				removePieces();
 				
 				ctx.beginPath();
@@ -274,6 +275,14 @@ function changeColor(id){
 				ctx.closePath();
 
 				checkMill("blue");
+
+				if(blueMill){
+					alert("blueMill");
+					playerTurn += 2;
+				}
+				else{
+					playerTurn++;
+				}
 			}
 		
 		
@@ -307,8 +316,6 @@ function changeColor(id){
 
 
 				ctx.beginPath();
-		
-
 				ctx.fillStyle="#FFFFFF";
 				ctx.font="20px Georgia";
 				ctx.fillText("Red\'s Move", 500, 50);
@@ -387,8 +394,19 @@ function checkMill(color){
 			continue;
 		}
 		else{
-			alert("mill");
 			currentMill = mills[i]
+			if(color === "blue"){
+				blueMill = true;
+				//playerTurn += 2;
+				alert("blue mill");
+			}
+			else{
+				redMill = true;
+				playerTurn += 2;
+				//alert("red mill");
+			}
+			//alert("mill");
+			
 			break;
 		}
 	}
