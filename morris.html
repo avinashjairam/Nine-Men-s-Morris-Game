@@ -359,6 +359,19 @@ function changeColor(id){
 				else if(redPieces.indexOf(id) > -1){
 					alert("invalid move");
 				}
+				else if( bluePieces.indexOf(id) > -1){
+
+					alert("good catch");
+					redPieces.push(id);
+					ctx.fillStyle="#FF0000";
+					ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+					ctx.closePath();
+					ctx.fill();
+					redCount++;
+					redMill = false;
+					playerTurn++;
+
+				}
 
 
 			}
