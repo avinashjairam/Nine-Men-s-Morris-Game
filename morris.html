@@ -98,6 +98,9 @@ var initialRedPieces = [];
 var initialBluePiecesY;
 var initialBluePieces = [];
 
+var capturedBluePieces = [];
+var capturedRedPieces = [];
+
 var circle0 = [0, 1, 3];
 var circle1 = [1,2,0,9];
 var circle2 = [2,1,7];
@@ -243,6 +246,31 @@ function changeColor(id){
 				alert(blueSelectMove);
 
 			}
+			else if(blueMill){
+				alert(redPieces.indexOf(id) + " " + bluePieces.indexOf(id));
+				
+				if(redPieces.indexOf(id) == -1 && bluePieces.indexOf(id) == -1){
+					alert("invalid move");
+				}
+				else if(bluePieces.indexOf(id) > -1){
+					alert("invalid move");
+				}
+				else if(redPieces.indexOf(id) > -1){
+
+					alert("good catch");
+					capturedRedPieces.push(id);
+					redPieces.splice(bluePieces.indexOf(id),1);
+					ctx.fillStyle="#000000";
+					ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+					ctx.closePath();
+					ctx.fill();
+					blueMill = false;
+					playerTurn++;
+					clearMessageBoard();
+
+				}
+
+			}
 
 			else if(blueCount >= 9 && bluePieces.indexOf(id) == -1 && blueSelectMove == false){
 				alert("blue count  " + blueCount);
@@ -362,14 +390,15 @@ function changeColor(id){
 				else if( bluePieces.indexOf(id) > -1){
 
 					alert("good catch");
-					redPieces.push(id);
-					ctx.fillStyle="#FF0000";
+					capturedBluePieces.push(id);
+					bluePieces.splice(bluePieces.indexOf(id),1);
+					ctx.fillStyle="#000000";
 					ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
 					ctx.closePath();
 					ctx.fill();
-					redCount++;
 					redMill = false;
 					playerTurn++;
+					clearMessageBoard();
 
 				}
 
@@ -443,7 +472,7 @@ function clearMessageBoard(){
 	//ctx.beginPath();
 	//alert("hey");
 	ctx.fillStyle = "#FFFFFF";
-	ctx.fillRect(500,30,200,150);
+	ctx.fillRect(500,30,500,150);
 	//ctx.closePath();
 }
 
