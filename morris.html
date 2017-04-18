@@ -189,7 +189,9 @@ for(var i =0; i<circles.length; i++){
 }
 //alert(circles);
 
-function init(){
+resetMill();
+
+function resetMill(){
 	for(var i = 0; i < mills.length; i++){
 		blueMillRecords[i] = false;
 		redMillRecords[i] = false;
@@ -494,7 +496,7 @@ function checkMill(color){
 	var currentMill = [];
 
 	for(var i = 0; i < mills.length; i++){
-		if(pieces.indexOf(mills[i][0]) == -1 || pieces.indexOf(mills[i][1]) == -1 || pieces.indexOf(mills[i][2]) == -1 ){
+		if(pieces.indexOf(mills[i][0]) == -1 || pieces.indexOf(mills[i][1]) == -1 || pieces.indexOf(mills[i][2]) == -1) {
 		//	alert(pieces.indexOf(mills[i][0]) + " " + pieces.indexOf(mills[i][1]) + " " + pieces.indexOf(mills[i][0]));
 			continue;
 		}
@@ -502,11 +504,13 @@ function checkMill(color){
 			currentMill = mills[i]
 			if(color === "blue"){
 				blueMill = true;
+				blueMillRecords[i] = true;
 				//playerTurn += 2;
 				//alert("blue mill");
 			}
 			else{
 				redMill = true;
+				redMillRecords[i] = true;
 				//playerTurn += 2;
 				//alert("red mill");
 			}
