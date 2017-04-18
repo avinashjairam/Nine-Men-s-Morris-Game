@@ -154,6 +154,9 @@ var redMill = false;
 var blueSelectMove = false;
 var redSelectMove = false;
 
+var blueMillRecords = [];
+var redMillRecords = [];
+
 drawSquares();
 
 
@@ -185,6 +188,13 @@ for(var i =0; i<circles.length; i++){
 	//alert(circleID[i] + " " + xCoordinates[i] + " " + yCoordinates[i]);
 }
 //alert(circles);
+
+function init(){
+	for(var i = 0; i < mills.length; i++){
+		blueMillRecords[i] = false;
+		redMillRecords[i] = false;
+	}
+}
 
 function changeColor(id){
 	ctx.beginPath();
