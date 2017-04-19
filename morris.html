@@ -503,18 +503,24 @@ function checkMill(color){
 		else{
 			currentMill = mills[i]
 			if(color === "blue"){
-				blueMill = true;
-				blueMillRecords[i] = true;
-				//playerTurn += 2;
-				//alert("blue mill");
+				if(blueMillRecords[i]){
+					continue;
+				}
+				else{
+					blueMill = true;
+					blueMillRecords[i] = true;
+				}
 			}
 			else{
-				redMill = true;
-				redMillRecords[i] = true;
-				//playerTurn += 2;
-				//alert("red mill");
+				if(redMillRecords[i]){
+					continue;
+				}
+				else{
+					redMill = true;
+					redMillRecords[i] = true;
+				}
 			}
-			//alert("mill");
+	
 			
 			break;
 		}
