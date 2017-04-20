@@ -235,7 +235,7 @@ function changeColor(id){
 				 ctx.fill();
 
 				bluePiecesToMove = [];
-				playerTurn++;
+				//playerTurn++;
 				blueSelectMove = false;
 
 
@@ -250,6 +250,24 @@ function changeColor(id){
 				ctx.font="20px Georgia";
 				ctx.fillText("Red\'s Move", 500, 50);
 				ctx.closePath();
+
+				checkMill("blue");
+
+
+				if(blueMill){
+					alert("Blue Mill");
+				 	clearMessageBoard();
+				 	ctx.fillStyle="#0000FF";
+					ctx.font="20px Georgia";
+					ctx.fillText("Blue Mill! You must capture a Red Piece!", 500, 50);
+					ctx.closePath();
+
+
+					playerTurn += 2;
+				}
+				else{
+					playerTurn++;
+				}
 
 			}
 			else if(blueCount >= 9 && bluePieces.indexOf(id) > -1){
@@ -305,13 +323,10 @@ function changeColor(id){
 				ctx.fill();
 				blueCount++;
 				drawPieces();
-				//playerTurn++;
+				
 				removePieces();
 				
-				// ctx.beginPath();
-				// ctx.fillStyle="#FFFFFF";
-				// ctx.font="20px Georgia";
-				// ctx.fillText("Blue\'s Move", 500, 50);
+			
 				clearMessageBoard();
 
 
@@ -373,7 +388,7 @@ function changeColor(id){
 				ctx.fill();
 
 				redPiecesToMove = [];
-				playerTurn++;
+				//playerTurn++;
 				redSelectMove = false;
 
 
@@ -386,6 +401,23 @@ function changeColor(id){
 				ctx.font="20px Georgia";
 				ctx.fillText("Blue\'s Move", 500, 50);
 				ctx.closePath();
+
+				checkMill("red");
+
+
+				if(redMill){					
+					alert("redMill");
+				 	clearMessageBoard();
+				 	ctx.fillStyle="#FF0000";
+					ctx.font="20px Georgia";
+					ctx.fillText("Red Mill! You must capture a Blue Piece!", 500, 50);
+					ctx.closePath();
+
+					playerTurn += 2;
+				}
+				else{
+					playerTurn++;
+				}
 
 			}
 			else if(redCount >= 9 && redPieces.indexOf(id) > -1){
@@ -454,10 +486,6 @@ function changeColor(id){
 				ctx.beginPath();
 		
 
-				// ctx.fillStyle="#FFFFFF";
-				// ctx.font="20px Georgia";
-				// ctx.fillText("Red\'s Move", 500, 50);
-
 				clearMessageBoard();
 
 				
@@ -468,18 +496,13 @@ function changeColor(id){
 
 				checkMill("red");
 
-				if(redMill){
-					//alert("red Mill");
-
-					
+				if(redMill){					
 					alert("redMill");
 				 	clearMessageBoard();
 				 	ctx.fillStyle="#FF0000";
 					ctx.font="20px Georgia";
 					ctx.fillText("Red Mill! You must capture a Blue Piece!", 500, 50);
 					ctx.closePath();
-
-
 
 					playerTurn += 2;
 				}
