@@ -204,8 +204,10 @@ function changeColor(id){
 
 
 	if( (bluePieces.indexOf(id) > -1 || redPieces.indexOf(id) > -1) && (blueCount < 9 || redCount < 9)  && (blueMill == false && redMill ==false) ){
+			alert("bluePieces " + bluePieces.indexOf(id) + "redPieces " + redPieces.indexOf(id) 
+				+ " blueCount " + blueCount + " redCount " + redCount + " blueMill " + blueMill + " redMill " + redMill );
 
-			alert("invalid move!" + blueCount + " " + redCount);
+			//alert("invalid move!" + blueCount + " " + redCount);
 	}
 	else if(playerTurn%2==0){
 
@@ -271,7 +273,7 @@ function changeColor(id){
 
 					alert("good catch");
 					capturedRedPieces.push(id);
-					redPieces.splice(bluePieces.indexOf(id),1);
+					redPieces.splice(redPieces.indexOf(id),1);
 					ctx.fillStyle="#000000";
 					ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
 					ctx.closePath();
@@ -279,6 +281,12 @@ function changeColor(id){
 					blueMill = false;
 					playerTurn++;
 					clearMessageBoard();
+
+					ctx.fillStyle="#FF0000";
+
+					ctx.font="20px Georgia";
+					ctx.fillText("Red\'s Move", 500, 50);
+					ctx.closePath();
 
 				}
 
@@ -300,11 +308,11 @@ function changeColor(id){
 				//playerTurn++;
 				removePieces();
 				
-				ctx.beginPath();
-				ctx.fillStyle="#FFFFFF";
-				ctx.font="20px Georgia";
-				ctx.fillText("Blue\'s Move", 500, 50);
-
+				// ctx.beginPath();
+				// ctx.fillStyle="#FFFFFF";
+				// ctx.font="20px Georgia";
+				// ctx.fillText("Blue\'s Move", 500, 50);
+				clearMessageBoard();
 
 
 				ctx.fillStyle="#FF0000";
@@ -412,6 +420,11 @@ function changeColor(id){
 					playerTurn++;
 					clearMessageBoard();
 
+					ctx.fillStyle="#0000FF";
+					ctx.font="20px Georgia";
+					ctx.fillText("Blue\'s Move", 500, 50);
+					ctx.closePath();
+
 				}
 
 
@@ -441,9 +454,11 @@ function changeColor(id){
 				ctx.beginPath();
 		
 
-				ctx.fillStyle="#FFFFFF";
-				ctx.font="20px Georgia";
-				ctx.fillText("Red\'s Move", 500, 50);
+				// ctx.fillStyle="#FFFFFF";
+				// ctx.font="20px Georgia";
+				// ctx.fillText("Red\'s Move", 500, 50);
+
+				clearMessageBoard();
 
 				
 				ctx.fillStyle="#0000FF";
