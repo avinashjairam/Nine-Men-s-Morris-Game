@@ -306,6 +306,7 @@ function changeColor(id){
 					ctx.font="20px Georgia";
 					ctx.fillText("Red\'s Move", 500, 50);
 					ctx.closePath();
+					resetMill();
 
 				}
 
@@ -378,6 +379,7 @@ function changeColor(id){
 				ctx.fill();
 				ctx.closePath();
 				
+
 				redPieces.push(id);
 				redPieces.splice(redPieces.indexOf(redPiecesToMove[0]),1);
 
@@ -460,6 +462,7 @@ function changeColor(id){
 					ctx.font="20px Georgia";
 					ctx.fillText("Blue\'s Move", 500, 50);
 					ctx.closePath();
+					resetMill();
 
 				}
 
@@ -551,6 +554,7 @@ function checkMill(color){
 				else{
 					blueMill = true;
 					blueMillRecords[i] = true;
+					alert("in checkMill blue is " + blueMill);
 				}
 			}
 			else{
@@ -560,6 +564,7 @@ function checkMill(color){
 				else{
 					redMill = true;
 					redMillRecords[i] = true;
+					alert("in checkMill red is " + redMill);
 				}
 			}
 	
