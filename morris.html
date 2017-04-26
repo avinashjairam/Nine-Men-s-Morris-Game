@@ -225,6 +225,7 @@ function changeColor(id){
 				ctx.closePath();
 				
 				bluePieces.push(id);
+				bluePieces.splice(bluePieces.indexOf(bluePiecesToMove[0]),1);
 
 				 ctx.beginPath();
 				 ctx.fillStyle="#000000";
@@ -378,12 +379,15 @@ function changeColor(id){
 				ctx.closePath();
 				
 				redPieces.push(id);
+				redPieces.splice(redPieces.indexOf(redPiecesToMove[0]),1);
 
 				ctx.beginPath();
 				ctx.fillStyle="#000000";
 				ctx.arc(xCoordinates[redPiecesToMove[0]],yCoordinates[redPiecesToMove[0]],10,0,2 * Math.PI);
 				// ctx.arc()
-				alert(xCoordinates[redPiecesToMove[0]] + " " + yCoordinates[redPiecesToMove[0]]);
+				//alert(xCoordinates[redPiecesToMove[0]] + " " + yCoordinates[redPiecesToMove[0]]);
+
+				alert(redPiecesToMove[0]);
 				ctx.closePath();
 				ctx.fill();
 
