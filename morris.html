@@ -314,6 +314,7 @@ function changeColor(id){
 							if(mills[i][0] == id || mills[i][1] == id || mills[i][2] ==id){
 								alert("Red mill about to be broken");
 								breakRedMill=true;
+								redMillRecords[i]=false;
 								///blueMillRecords[i]=false;
 							}
 							
@@ -327,6 +328,7 @@ function changeColor(id){
 						breakRedMill=false;
 					}
 					else{
+
 						alert("good catch");
 						capturedRedPieces.push(id);
 						redPieces.splice(redPieces.indexOf(id),1);
@@ -504,7 +506,7 @@ function changeColor(id){
 							if(mills[i][0] == id || mills[i][1] == id || mills[i][2] ==id){
 								alert("Blue mill about to be broken");
 								breakBlueMill=true;
-								///blueMillRecords[i]=false;
+								blueMillRecords[i]=false;
 							}
 							
 						}
