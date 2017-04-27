@@ -148,6 +148,10 @@ var mills = [[16,19,20],
 
 var blueCount = 0;
 var redCount = 0;
+
+var blueMillIndex;
+var redMillIndex;
+
 var blueMill = false;
 var redMill = false;
 
@@ -276,6 +280,17 @@ function changeColor(id){
 				blueSelectMove = true;
 				bluePiecesToMove.push(id);
 				//delete bluePieces[bluePieces.indexOf(id)];
+
+				for(var i =0; i < blueMillRecords.length; i++){
+					if(blueMillRecords[i]){
+						if(mills[i][0] == id || mills[i][1] == id || mills[i][2] ==id){
+							alert("mill about to be broken");
+							blueMillRecords[i]=false;
+						}
+						
+					}
+				}
+
 				alert(blueSelectMove);
 
 			}
@@ -289,6 +304,17 @@ function changeColor(id){
 					alert("invalid move");
 				}
 				else if(redPieces.indexOf(id) > -1){
+
+
+					for(var i =0; i < redMillRecords.length; i++){
+						if(redMillRecords[i]){
+							if(mills[i][0] == id || mills[i][1] == id || mills[i][2] ==id){
+								alert("Red mill about to be broken");
+								///blueMillRecords[i]=false;
+							}
+							
+						}
+					}	
 
 					alert("good catch");
 					capturedRedPieces.push(id);
@@ -306,7 +332,9 @@ function changeColor(id){
 					ctx.font="20px Georgia";
 					ctx.fillText("Red\'s Move", 500, 50);
 					ctx.closePath();
-					resetMill();
+				//	blueMillRecords[blueMillIndex] = false;
+					alert(blueMillIndex);
+					//resetMill();
 
 				}
 
@@ -408,6 +436,8 @@ function changeColor(id){
 				ctx.fillText("Blue\'s Move", 500, 50);
 				ctx.closePath();
 
+
+
 				checkMill("red");
 
 
@@ -431,6 +461,16 @@ function changeColor(id){
 				redSelectMove = true;
 				redPiecesToMove.push(id);
 
+				for(var i =0; i < redMillRecords.length; i++){
+					if(redMillRecords[i]){
+						if(mills[i][0] == id || mills[i][1] == id || mills[i][2] ==id){
+							alert("mill about to be broken");
+							redMillRecords[i]=false;
+						}
+						
+					}
+				}
+
 				//delete redPieces[redPieces.indexOf(id)];
 				alert(redSelectMove);
 
@@ -447,6 +487,17 @@ function changeColor(id){
 				}
 				else if( bluePieces.indexOf(id) > -1){
 
+
+				for(var i =0; i < blueMillRecords.length; i++){
+					if(blueMillRecords[i]){
+						if(mills[i][0] == id || mills[i][1] == id || mills[i][2] ==id){
+							alert("Blue mill about to be broken");
+							///blueMillRecords[i]=false;
+						}
+						
+					}
+				}
+
 					alert("good catch");
 					capturedBluePieces.push(id);
 					bluePieces.splice(bluePieces.indexOf(id),1);
@@ -462,7 +513,10 @@ function changeColor(id){
 					ctx.font="20px Georgia";
 					ctx.fillText("Blue\'s Move", 500, 50);
 					ctx.closePath();
-					resetMill();
+					// alert(redMillRecords);
+					// redMillRecords[redMillIndex] = false;
+					// alert(redMillRecords);
+					//resetMill();
 
 				}
 
@@ -540,6 +594,8 @@ function checkMill(color){
 
 	var currentMill = [];
 
+	alert("blue " + bluePieces.length + " red " + redPieces.length);
+
 	for(var i = 0; i < mills.length; i++){
 		if(pieces.indexOf(mills[i][0]) == -1 || pieces.indexOf(mills[i][1]) == -1 || pieces.indexOf(mills[i][2]) == -1) {
 		//	alert(pieces.indexOf(mills[i][0]) + " " + pieces.indexOf(mills[i][1]) + " " + pieces.indexOf(mills[i][0]));
@@ -554,7 +610,9 @@ function checkMill(color){
 				else{
 					blueMill = true;
 					blueMillRecords[i] = true;
-					alert("in checkMill blue is " + blueMill);
+					blueMillIndex = i;
+					//alert("in checkMill blue is " + blueMill);
+					alert(blueMillIndex);
 				}
 			}
 			else{
@@ -564,7 +622,9 @@ function checkMill(color){
 				else{
 					redMill = true;
 					redMillRecords[i] = true;
-					alert("in checkMill red is " + redMill);
+					redMillIndex = i;
+					//alert("in checkMill red is " + redMill);
+					alert(redMillRecords);
 				}
 			}
 	
