@@ -158,6 +158,9 @@ var redMill = false;
 var blueSelectMove = false;
 var redSelectMove = false;
 
+var breakBlueMill=false;
+var breakRedMill=false;
+
 var blueMillRecords = [];
 var redMillRecords = [];
 
@@ -310,31 +313,39 @@ function changeColor(id){
 						if(redMillRecords[i]){
 							if(mills[i][0] == id || mills[i][1] == id || mills[i][2] ==id){
 								alert("Red mill about to be broken");
+								breakRedMill=true;
 								///blueMillRecords[i]=false;
 							}
 							
 						}
 					}	
 
-					alert("good catch");
-					capturedRedPieces.push(id);
-					redPieces.splice(redPieces.indexOf(id),1);
-					ctx.fillStyle="#000000";
-					ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
-					ctx.closePath();
-					ctx.fill();
-					blueMill = false;
-					playerTurn++;
-					clearMessageBoard();
 
-					ctx.fillStyle="#FF0000";
 
-					ctx.font="20px Georgia";
-					ctx.fillText("Red\'s Move", 500, 50);
-					ctx.closePath();
-				//	blueMillRecords[blueMillIndex] = false;
-					alert(blueMillIndex);
-					//resetMill();
+					if(breakRedMill && redPieces.length > 3){
+						alert("You can only capture pieces from a mill when no others are available");
+						breakRedMill=false;
+					}
+					else{
+						alert("good catch");
+						capturedRedPieces.push(id);
+						redPieces.splice(redPieces.indexOf(id),1);
+						ctx.fillStyle="#000000";
+						ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+						ctx.closePath();
+						ctx.fill();
+						blueMill = false;
+						playerTurn++;
+						clearMessageBoard();
+
+						ctx.fillStyle="#FF0000";
+
+						ctx.font="20px Georgia";
+						ctx.fillText("Red\'s Move", 500, 50);
+						ctx.closePath();
+						//alert(blueMillIndex);
+
+					}				
 
 				}
 
@@ -488,39 +499,43 @@ function changeColor(id){
 				else if( bluePieces.indexOf(id) > -1){
 
 
-				for(var i =0; i < blueMillRecords.length; i++){
-					if(blueMillRecords[i]){
-						if(mills[i][0] == id || mills[i][1] == id || mills[i][2] ==id){
-							alert("Blue mill about to be broken");
-							///blueMillRecords[i]=false;
+					for(var i =0; i < blueMillRecords.length; i++){
+						if(blueMillRecords[i]){
+							if(mills[i][0] == id || mills[i][1] == id || mills[i][2] ==id){
+								alert("Blue mill about to be broken");
+								breakBlueMill=true;
+								///blueMillRecords[i]=false;
+							}
+							
 						}
-						
+					}
+
+					if(breakBlueMill && bluePieces.length > 3){
+						alert("You can only capture pieces from a mill when no others are available");
+
+
+
+
+						breakBlueMill=false;
+					}
+					else{
+						alert("good catch");
+						capturedBluePieces.push(id);
+						bluePieces.splice(bluePieces.indexOf(id),1);
+						ctx.fillStyle="#000000";
+						ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+						ctx.closePath();
+						ctx.fill();
+						redMill = false;
+						playerTurn++;
+						clearMessageBoard();
+
+						ctx.fillStyle="#0000FF";
+						ctx.font="20px Georgia";
+						ctx.fillText("Blue\'s Move", 500, 50);
+						ctx.closePath();
 					}
 				}
-
-					alert("good catch");
-					capturedBluePieces.push(id);
-					bluePieces.splice(bluePieces.indexOf(id),1);
-					ctx.fillStyle="#000000";
-					ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
-					ctx.closePath();
-					ctx.fill();
-					redMill = false;
-					playerTurn++;
-					clearMessageBoard();
-
-					ctx.fillStyle="#0000FF";
-					ctx.font="20px Georgia";
-					ctx.fillText("Blue\'s Move", 500, 50);
-					ctx.closePath();
-					// alert(redMillRecords);
-					// redMillRecords[redMillIndex] = false;
-					// alert(redMillRecords);
-					//resetMill();
-
-				}
-
-
 			}
 			else if(redCount >= 9 && redPieces.indexOf(id) == -1 && redSelectMove == false){
 				alert("red count  " + redCount);
