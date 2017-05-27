@@ -343,6 +343,9 @@ function changeColor(id){
 
 						capturedRedPieces.push(id);
 						redPieces.splice(redPieces.indexOf(id),1);
+
+						alert("captured red pieces " + capturedRedPieces.length);
+
 						ctx.fillStyle="#000000";
 						ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
 						ctx.closePath();
@@ -535,6 +538,9 @@ function changeColor(id){
 						blueMillIndex=-1;
 						capturedBluePieces.push(id);
 						bluePieces.splice(bluePieces.indexOf(id),1);
+
+						alert("captured blue pieces " + capturedBluePieces.length);
+
 						ctx.fillStyle="#000000";
 						ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
 						ctx.closePath();
