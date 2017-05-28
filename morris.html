@@ -1,16 +1,8 @@
 <html>
-
-
 <head>
-
-
-<title>Nine Men's Morris</title>
-
-<link type="text/css" rel="stylesheet" href="./css/stylesheet.css"/>
-
+	<title>Nine Men's Morris</title>
+	<link type="text/css" rel="stylesheet" href="./css/stylesheet.css"/>
 </head>
-
-
 
 <body>
 <!-- 
@@ -168,6 +160,7 @@ var gameOver = false;
 var blueWin = false;
 var redWin = false;
 
+var breakMillException = false;
 
 var blueMillRecords = [];
 var redMillRecords = [];
@@ -625,13 +618,6 @@ function changeColor(id){
 				}
 			}
 	}
-	// else{
-	// 	gameOverMessage();
-	// }
-	
-
-	
-
 }
 
 function clearMessageBoard(){
@@ -640,6 +626,40 @@ function clearMessageBoard(){
 	ctx.fillStyle = "#FFFFFF";
 	ctx.fillRect(500,30,500,150);
 	//ctx.closePath();
+}
+
+function millBreakException(color){
+	var matchCount = 0;
+
+	var pieces = color === "blue" ? bluePieces: redPieces;
+
+	var list1= [];
+
+	//alert("blue " + bluePieces.length + " red " + redPieces.length);
+
+	for(var i = 0; i < mills.length; i++){
+		if(pieces.indexOf(mills[i][0]) > -1 && pieces.indexOf(mills[i][1]) > -1 && pieces.indexOf(mills[i][2]) > -1) {
+			if(list1.indexOf(mills[i][0]) == -1){
+				list1.push(mills[i][0]);
+			}
+			if(list1.indexOf(mills[i][1]) == -1){
+				list1.push(mills[i][1]);
+			}
+			if(list1.indexOf(mills[i][2]) == -1){
+				list1.push(mills[i][2]);
+			}
+		}
+	}
+
+	if(list1.length == pieces.length){
+		return true;
+	}
+	else{
+		return false;
+	}
+
+
+
 }
 
 function checkMill(color){
