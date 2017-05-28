@@ -316,6 +316,7 @@ function changeColor(id){
 								alert("Red mill about to be broken");
 								alert("possible red mill indexes " + i);	
 								breakRedMill=true;
+								millBreakException("red");
 								redMillIndexArray.push(i);
 							//	checkAllMill("red");
 								//redMillRecords[i]=false;
@@ -327,12 +328,12 @@ function changeColor(id){
 
 
 
-					if(breakRedMill && redPieces.length > 3){
+					if(breakRedMill && redPieces.length > 3 && breakMillException==false){
 						alert("You can only capture pieces from a mill when no others are available");
 						breakRedMill=false;
 					}
 					else{
-
+						breakMillException = false;
 						alert("good catch");
 						alert(redMillRecords);
 					//	redMillRecords[redMillIndex]=false;
@@ -525,19 +526,22 @@ function changeColor(id){
 							if(mills[i][0] == id || mills[i][1] == id || mills[i][2] ==id){
 								alert("Blue mill about to be broken");
 								breakBlueMill=true;
+								millBreakException("blue");
 								blueMillIndex = i;
 								//checkAllMill("blue");
 								//blueMillRecords[i]=false;
 							}
 							
+
 						}
 					}
 
-					if(breakBlueMill && bluePieces.length > 3){
+					if(breakBlueMill && bluePieces.length > 3 && breakMillException==false){
 						alert("You can only capture pieces from a mill when no others are available");
 						breakBlueMill=false;
 					}
 					else{
+						breakMillException = false;
 						alert("good catch");
 						//blueMillRecords[blueMillIndex]=false;
 						blueMillIndex=-1;
@@ -629,16 +633,17 @@ function clearMessageBoard(){
 }
 
 function millBreakException(color){
-	var matchCount = 0;
+
 
 	var pieces = color === "blue" ? bluePieces: redPieces;
-
+	var records = color === "blue" ? blueMillRecords: redMillRecords;
 	var list1= [];
 
 	//alert("blue " + bluePieces.length + " red " + redPieces.length);
 
 	for(var i = 0; i < mills.length; i++){
 		if(pieces.indexOf(mills[i][0]) > -1 && pieces.indexOf(mills[i][1]) > -1 && pieces.indexOf(mills[i][2]) > -1) {
+			records[i] = false;
 			if(list1.indexOf(mills[i][0]) == -1){
 				list1.push(mills[i][0]);
 			}
@@ -652,11 +657,9 @@ function millBreakException(color){
 	}
 
 	if(list1.length == pieces.length){
-		return true;
+		breakMillException = true;
 	}
-	else{
-		return false;
-	}
+	
 
 
 
