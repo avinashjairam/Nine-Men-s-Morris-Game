@@ -164,6 +164,11 @@ var redSelectMove = false;
 var breakBlueMill=false;
 var breakRedMill=false;
 
+var gameOver = false;
+var blueWin = false;
+var redWin = false;
+
+
 var blueMillRecords = [];
 var redMillRecords = [];
 
@@ -219,7 +224,7 @@ function changeColor(id){
 
 			//alert("invalid move!" + blueCount + " " + redCount);
 	}
-	else if(playerTurn%2==0){
+	else if(playerTurn%2==0 && gameOver == false){
 
 			ctx.beginPath();
 		
@@ -344,7 +349,7 @@ function changeColor(id){
 						capturedRedPieces.push(id);
 						redPieces.splice(redPieces.indexOf(id),1);
 
-						alert("captured red pieces " + capturedRedPieces.length);
+						//alert("captured red pieces " + capturedRedPieces.length);
 
 						ctx.fillStyle="#000000";
 						ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
@@ -360,6 +365,13 @@ function changeColor(id){
 						ctx.fillText("Red\'s Move", 500, 50);
 						ctx.closePath();
 						//alert(blueMillIndex);
+
+						if(capturedRedPieces.length > 6){
+							gameOver = true;
+							blueWin = true;
+							gameOverMessage();
+							//alert("Red Lost & Blue won");
+						}
 
 					}				
 
@@ -414,7 +426,7 @@ function changeColor(id){
 		
 		
 	}
-	else{
+	else if(playerTurn%2==1 && gameOver == false){
 			// if(redMill){
 			// 	alert("redMilladsfasdfasdf");
 			// }
@@ -539,7 +551,7 @@ function changeColor(id){
 						capturedBluePieces.push(id);
 						bluePieces.splice(bluePieces.indexOf(id),1);
 
-						alert("captured blue pieces " + capturedBluePieces.length);
+					//	alert("captured blue pieces " + capturedBluePieces.length);
 
 						ctx.fillStyle="#000000";
 						ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
@@ -553,6 +565,13 @@ function changeColor(id){
 						ctx.font="20px Georgia";
 						ctx.fillText("Blue\'s Move", 500, 50);
 						ctx.closePath();
+
+						if(capturedBluePieces.length > 6){
+							gameOver = true;
+							redWin = true; 
+							gameOverMessage();
+							//alert("Blue Lost & Red won");
+						}
 					}
 				}
 			}
@@ -605,8 +624,10 @@ function changeColor(id){
 					playerTurn++;
 				}
 			}
-		
 	}
+	// else{
+	// 	gameOverMessage();
+	// }
 	
 
 	
@@ -675,6 +696,25 @@ function checkMill(color){
 
 }
 
+
+function gameOverMessage(){
+	if(gameOver){
+		clearMessageBoard();
+		if(blueWin){
+			ctx.fillStyle="#0000FF";
+			ctx.font="20px Georgia";
+			ctx.fillText("GAME OVER! Blue Won! Red Lost", 500, 50);
+			ctx.closePath();
+		}
+		else if(redWin){
+			ctx.fillStyle="#FF0000";
+			ctx.font="20px Georgia";
+			ctx.fillText("GAME OVER! Red Won! Blue Lost!", 500, 50);
+			ctx.closePath();
+
+		}
+	}
+}
 
 //This function draws 3 squares on the screen
 function drawSquares(){
