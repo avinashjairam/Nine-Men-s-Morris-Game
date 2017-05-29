@@ -39,6 +39,13 @@ function doMouseDown(event){
 }
 var ctx = c.getContext("2d");
 
+ctx.beginPath();
+ctx.fillStyle="#0000FF";
+ctx.font="20px Georgia";
+ctx.fillText("Blue\'s Move", 500, 50);
+
+ ctx.fillStyle="#000000";
+
 var xSquare1 = 110;
 var ySquare1 = 110;
 
@@ -243,7 +250,7 @@ function resetMill(){
 function changeColor(id){
 	ctx.beginPath();
 
-
+			
 
 	if( (bluePieces.indexOf(id) > -1 || redPieces.indexOf(id) > -1) && (blueCount < 9 || redCount < 9)  && (blueMill == false && redMill ==false) ){
 			alert("bluePieces " + bluePieces.indexOf(id) + "redPieces " + redPieces.indexOf(id) 
@@ -254,6 +261,8 @@ function changeColor(id){
 	else if(playerTurn%2==0 && gameOver == false){
 
 			ctx.beginPath();
+
+			
 		
 			if(bluePieces.indexOf(id) > -1 && blueCount < 9){
 					alert("blue count  " + blueCount);
@@ -322,6 +331,7 @@ function changeColor(id){
 					invalidMoveMessage();
 					blueSelectMove = false;
 					playerTurn += 2;
+					bluePiecesToMove = [];
 				}
 
 			}
@@ -541,6 +551,7 @@ function changeColor(id){
 					invalidMoveMessage();
 					playerTurn += 2;
 					redSelectMove = false;
+					redPiecesToMove = [];
 				
 
 				}
