@@ -7,8 +7,9 @@
 	display: block;
 }
 
-#coinToss{
-	width:50px;
+#coin{
+	text-align: center;
+	width:100px;
 	height:50px;
 
 }

@@ -14,11 +14,15 @@
 
 </div> -->
 
+<button onclick = "coin()" id="coin">Coin Toss</button>
+
 
 <canvas id="gameArea" width="1000" height="1500">
 Your browser does not support the HTML5 canvas tag.</canvas>
 
 <script>
+
+
 
 var c = document.getElementById("gameArea");
 c.addEventListener("mousedown", doMouseDown,false);
@@ -40,11 +44,39 @@ function doMouseDown(event){
 var ctx = c.getContext("2d");
 
 ctx.beginPath();
-ctx.fillStyle="#0000FF";
-ctx.font="20px Georgia";
-ctx.fillText("Blue\'s Move", 500, 50);
 
- ctx.fillStyle="#000000";
+function coin(){
+	var n = Math.floor((Math.random() * 1000) + 1);
+	var ctx = c.getContext("2d");
+
+	ctx.beginPath();
+
+	//alert("hii");
+
+	document.getElementById('coin').style.visibility="hidden";
+	if (n % 2 == 0){
+
+		ctx.fillStyle="#0000FF";
+		ctx.font="20px Georgia";
+		ctx.fillText("Blue\'s Move", 500, 50);
+		playerTurn += 2;
+
+		 ctx.fillStyle="#000000";
+	}
+	else{
+		playerTurn += 1;
+		ctx.fillStyle="#FF0000";
+		ctx.font="20px Georgia";
+		ctx.fillText("Red\'s Move", 500, 50);
+
+		 ctx.fillStyle="#000000";
+
+	}
+
+
+
+}
+
 
 var xSquare1 = 110;
 var ySquare1 = 110;
@@ -224,6 +256,8 @@ drawLines();
 drawPieces();
 
 var json = JSON.stringify(circles);
+
+var coinToss = false; 
 
 
 
@@ -969,7 +1003,7 @@ function drawPieces(){
 
 	//alert("hey");
 	ctx.font="20px Georgia";
-	ctx.fillText("Player", blueX, blueY-20);
+	ctx.fillText("Player Blue", blueX, blueY-20);
 
 	for(var i = 0; i < 9 - bluePieces.length; i++){
 		initialBluePieces.push(blueX);
@@ -985,7 +1019,7 @@ function drawPieces(){
 	initialRedPiecesY = redY;
 
 	ctx.fillStyle="#FF0000";
-	ctx.fillText("Computer", redX, redY-20);
+	ctx.fillText("Player Red", redX, redY-20);
 
 	ctx.beginPath();
 
