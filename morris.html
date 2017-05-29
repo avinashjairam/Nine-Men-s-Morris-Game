@@ -197,6 +197,8 @@ var breakMillException = false;
 var blueMillRecords = [];
 var redMillRecords = [];
 
+var validMove = false;
+
 drawSquares();
 
 
@@ -259,56 +261,67 @@ function changeColor(id){
 			}
 			else if(blueSelectMove){
 				checkValidMove("blue", bluePiecesToMove[0],id);
-				ctx.beginPath();
-				ctx.fillStyle="#0000FF";
-				ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
-				ctx.fill();
-				ctx.closePath();
-				
-				bluePieces.push(id);
-				bluePieces.splice(bluePieces.indexOf(bluePiecesToMove[0]),1);
 
-				 ctx.beginPath();
-				 ctx.fillStyle="#000000";
-				 ctx.arc(xCoordinates[bluePiecesToMove[0]],yCoordinates[bluePiecesToMove[0]],10,0,2 * Math.PI);
-				// ctx.arc()
-				 alert(xCoordinates[bluePiecesToMove[0]] + " " + yCoordinates[bluePiecesToMove[0]]);
-				 ctx.closePath();
-				 ctx.fill();
+				if(validMove){
+					validMove = false; 
+					
+					ctx.beginPath();
+					ctx.fillStyle="#0000FF";
+					ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+					ctx.fill();
+					ctx.closePath();
+					
+					bluePieces.push(id);
+					bluePieces.splice(bluePieces.indexOf(bluePiecesToMove[0]),1);
 
-				bluePiecesToMove = [];
-				//playerTurn++;
-				blueSelectMove = false;
+					 ctx.beginPath();
+					 ctx.fillStyle="#000000";
+					 ctx.arc(xCoordinates[bluePiecesToMove[0]],yCoordinates[bluePiecesToMove[0]],10,0,2 * Math.PI);
+					// ctx.arc()
+					 alert(xCoordinates[bluePiecesToMove[0]] + " " + yCoordinates[bluePiecesToMove[0]]);
+					 ctx.closePath();
+					 ctx.fill();
 
+					bluePiecesToMove = [];
+					//playerTurn++;
+					blueSelectMove = false;
 
-				ctx.beginPath();
-				ctx.fillStyle="#FFFFFF";
-				ctx.font="20px Georgia";
-				ctx.fillText("Blue\'s Move", 500, 50);
+					clearMessageBoard();
 
-				ctx.fillStyle="#FF0000";
-			
-				//alert("hey");
-				ctx.font="20px Georgia";
-				ctx.fillText("Red\'s Move", 500, 50);
-				ctx.closePath();
-
-				checkMill("blue");
-
-
-				if(blueMill){
-					alert("Blue Mill");
-				 	clearMessageBoard();
-				 	ctx.fillStyle="#0000FF";
+					ctx.beginPath();
+					ctx.fillStyle="#FFFFFF";
 					ctx.font="20px Georgia";
-					ctx.fillText("Blue Mill! You must capture a Red Piece!", 500, 50);
+					ctx.fillText("Blue\'s Move", 500, 50);
+
+					ctx.fillStyle="#FF0000";
+				
+					//alert("hey");
+					ctx.font="20px Georgia";
+					ctx.fillText("Red\'s Move", 500, 50);
 					ctx.closePath();
 
+					checkMill("blue");
 
-					playerTurn += 2;
+
+					if(blueMill){
+						alert("Blue Mill");
+					 	clearMessageBoard();
+					 	ctx.fillStyle="#0000FF";
+						ctx.font="20px Georgia";
+						ctx.fillText("Blue Mill! You must capture a Red Piece!", 500, 50);
+						ctx.closePath();
+
+
+						playerTurn += 2;
+					}
+					else{
+						playerTurn++;
+					}
 				}
 				else{
-					playerTurn++;
+					invalidMoveMessage();
+					blueSelectMove = false;
+					playerTurn += 2;
 				}
 
 			}
@@ -468,58 +481,68 @@ function changeColor(id){
 			// }
 			else if(redSelectMove){
 				checkValidMove("red",redPiecesToMove[0],id);
-				ctx.beginPath();
-				ctx.fillStyle="#FF0000";
-				ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
-				ctx.fill();
-				ctx.closePath();
-				
 
-				redPieces.push(id);
-				redPieces.splice(redPieces.indexOf(redPiecesToMove[0]),1);
+				if(validMove){
+					validMove = false; 
 
-				ctx.beginPath();
-				ctx.fillStyle="#000000";
-				ctx.arc(xCoordinates[redPiecesToMove[0]],yCoordinates[redPiecesToMove[0]],10,0,2 * Math.PI);
-				// ctx.arc()
-				//alert(xCoordinates[redPiecesToMove[0]] + " " + yCoordinates[redPiecesToMove[0]]);
+					ctx.beginPath();
+					ctx.fillStyle="#FF0000";
+					ctx.arc(xCoordinates[id],yCoordinates[id],10,0,2 * Math.PI);
+					ctx.fill();
+					ctx.closePath();
+					
+					redPieces.push(id);
+					redPieces.splice(redPieces.indexOf(redPiecesToMove[0]),1);
 
-				alert(redPiecesToMove[0]);
-				ctx.closePath();
-				ctx.fill();
+					ctx.beginPath();
+					ctx.fillStyle="#000000";
+					ctx.arc(xCoordinates[redPiecesToMove[0]],yCoordinates[redPiecesToMove[0]],10,0,2 * Math.PI);
+					// ctx.arc()
+					//alert(xCoordinates[redPiecesToMove[0]] + " " + yCoordinates[redPiecesToMove[0]]);
 
-				redPiecesToMove = [];
-				//playerTurn++;
-				redSelectMove = false;
+					alert(redPiecesToMove[0]);
+					ctx.closePath();
+					ctx.fill();
 
+					redPiecesToMove = [];
+					//playerTurn++;
+					redSelectMove = false;
 
-				ctx.beginPath();
-				ctx.fillStyle="#FFFFFF";
-				ctx.font="20px Georgia";
-				ctx.fillText("Red\'s Move", 500, 50);
+					clearMessageBoard();
 
-				ctx.fillStyle="#0000FF";
-				ctx.font="20px Georgia";
-				ctx.fillText("Blue\'s Move", 500, 50);
-				ctx.closePath();
-
-
-
-				checkMill("red");
-
-
-				if(redMill){					
-					alert("redMill");
-				 	clearMessageBoard();
-				 	ctx.fillStyle="#FF0000";
+					ctx.beginPath();
+					ctx.fillStyle="#FFFFFF";
 					ctx.font="20px Georgia";
-					ctx.fillText("Red Mill! You must capture a Blue Piece!", 500, 50);
+					ctx.fillText("Red\'s Move", 500, 50);
+
+					ctx.fillStyle="#0000FF";
+					ctx.font="20px Georgia";
+					ctx.fillText("Blue\'s Move", 500, 50);
 					ctx.closePath();
 
-					playerTurn += 2;
+					checkMill("red");
+
+
+					if(redMill){					
+						alert("redMill");
+					 	clearMessageBoard();
+					 	ctx.fillStyle="#FF0000";
+						ctx.font="20px Georgia";
+						ctx.fillText("Red Mill! You must capture a Blue Piece!", 500, 50);
+						ctx.closePath();
+
+						playerTurn += 2;
+					}
+					else{
+						playerTurn++;
+					}
 				}
 				else{
-					playerTurn++;
+					invalidMoveMessage();
+					playerTurn += 2;
+					redSelectMove = false;
+				
+
 				}
 
 			}
@@ -984,40 +1007,36 @@ function checkAllMill(color){
 
 function checkValidMove(color, source, destination){
 	var pieces = color === "blue" ? bluePieces: redPieces;
-	var valid = false;
+	
 
 	var sourceNeighbors = circleNeighbors[source];
 	var destinationNeighbors = circleNeighbors[destination];
 
 	alert("sourceNeighbors " + sourceNeighbors + " " + " destinationNeighbors " + destinationNeighbors );
 
-	if(sourceNeighbors.indexOf(destinationNeighbors[0]) > -1 && destinationNeighbors.indexOf(sourceNeighbors[0]) > -1){
-		alert("valid move");
+	if( (sourceNeighbors.indexOf(destinationNeighbors[0]) > -1 && destinationNeighbors.indexOf(sourceNeighbors[0]) > -1)
+		|| pieces.length < 4){
+		validMove = true;
+		//alert("valid move");
 	}
 	else{
-		alert("invalid move");
+		validMove = false;
+		
+		//alert("invalid move");
 	}
 
-	// for(var i =0; i < sourceNeighbors.length; i++){
-	// 		for(var j =0; j < destinationNeighbors.length; j++){
-	// 			if(sourceNeighbors[i] == destinationNeighbors[j]){
-	// 				valid = true;
-	// 				alert("valid move");
-	// 				break;
-	// 			}
-	// 		}
-	// }
-
-	// if(valid == false){
-	// 	alert("invalid move");
-	// }
-
-
-
-
-
+	
 }
 
+
+function invalidMoveMessage(){
+//	clearMessageBoard();
+	ctx.fillStyle="#000000";
+	ctx.font="20px Georgia";
+	ctx.fillText("INVALID MOVE!", 500, 150);
+	ctx.closePath();
+		
+}
 
 
 </script> 
